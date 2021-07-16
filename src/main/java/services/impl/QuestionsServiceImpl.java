@@ -1,6 +1,7 @@
 package services.impl;
 
 import entity.Question;
+import exceptions.CSVWriterException;
 import exceptions.ResourceReaderException;
 import services.interfaces.QuestionsService;
 import utils.CSVReader;
@@ -11,15 +12,13 @@ import java.util.List;
 
 public class QuestionsServiceImpl implements QuestionsService {
 
-    private String questionsFile;
-    private CSVReader csvReader;
+    private CSVReader questionsCSVReader;
 
     @Override
-    public List<Question> getQuestions() throws ResourceReaderException {
+    public List<Question> getQuestions() throws CSVWriterException {
         ArrayList<Question> questions = new ArrayList<>();
-        csvReader.setCsv(ResourceReader.readFileToString(questionsFile));
-        csvReader.parse();
-        CSVReader.ResultSet resultSet = csvReader.getResult();
+        questionsCSVReader.parse();
+        CSVReader.ResultSet resultSet = questionsCSVReader.getResult();
         while (resultSet.next()) {
             questions.add(new Question(resultSet.get("question"), Integer.parseInt(resultSet.get("correct")),
                     resultSet.get("answer1"), resultSet.get("answer2"), resultSet.get("answer3")));
@@ -27,11 +26,7 @@ public class QuestionsServiceImpl implements QuestionsService {
         return questions;
     }
 
-    public void setCsvReader(CSVReader csvReader) {
-        this.csvReader = csvReader;
-    }
-
-    public void setQuestionsFile(String questionsFile) {
-        this.questionsFile = questionsFile;
+    public void setQuestionsCSVReader(CSVReader questionsCSVReader) {
+        this.questionsCSVReader = questionsCSVReader;
     }
 }

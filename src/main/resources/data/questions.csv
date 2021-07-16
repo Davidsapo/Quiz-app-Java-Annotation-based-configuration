@@ -1,3 +1,6 @@
 question,answer1,answer2,answer3,correct
-How?,firs,sec,third,2
-Why?,ans1,ans2,ans3,3
+Which of those doesn’t have an index based structure?,List,Set,Map,2
+java.util.Collections is a:,Class,Interface,Object,1
+Which of those allows duplicate elements?,Set,List,All,2
+Which allows the storage of a null key and null values?,HashMap,Hashtable,None of the above,1
+Which interface should be implemented for sorting?,Serializable,Comparable,Comparator,3

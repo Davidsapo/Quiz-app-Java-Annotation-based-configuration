@@ -4,27 +4,16 @@ import javax.swing.*;
 
 public class LeaderboardView extends javax.swing.JFrame {
 
-    private JLabel jLabel13;
-    private JLabel jLabel14;
     private JList jList1;
-    private JPanel jPanel1;
-    private JPanel jPanel12;
-    private JPanel jPanel13;
-    private JScrollPane jScrollPane1;
-
-    public LeaderboardView() {
-        initComponents();
-    }
 
     private void initComponents() {
 
-        jPanel1 = new JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        JPanel jPanel1 = new JPanel();
+        JScrollPane jScrollPane1 = new JScrollPane();
         jList1 = new JList();
-        jPanel13 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
+        JPanel jPanel13 = new JPanel();
+        JLabel jLabel14 = new JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 0));
@@ -33,9 +22,15 @@ public class LeaderboardView extends javax.swing.JFrame {
         jList1.setFont(new java.awt.Font("Arial Rounded MT Bold", 0, 24)); // NOI18N
         jList1.setForeground(new java.awt.Color(255, 255, 255));
         jList1.setModel(new AbstractListModel() {
-            String[] strings = { "David Sapozhnik: 5", "David Sapozhnik: 5", "David Sapozhnik: 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            String[] strings = {"David Sapozhnik: 5", "David Sapozhnik: 5", "David Sapozhnik: 5"};
+
+            public int getSize() {
+                return strings.length;
+            }
+
+            public String getElementAt(int i) {
+                return strings[i];
+            }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -85,5 +80,19 @@ public class LeaderboardView extends javax.swing.JFrame {
 
         pack();
         setLocationRelativeTo(null);
+    }
+
+    public void fillList(Object[] objects) {
+        jList1.setModel(new AbstractListModel() {
+            @Override
+            public int getSize() {
+                return objects.length;
+            }
+
+            @Override
+            public Object getElementAt(int index) {
+                return objects[index];
+            }
+        });
     }
 }

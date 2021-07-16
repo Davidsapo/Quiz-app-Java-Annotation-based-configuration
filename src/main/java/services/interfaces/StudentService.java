@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface StudentService {
 
-    List<Student> getStudents() throws ResourceReaderException;
+    List<Student> getStudents() throws ResourceReaderException, CSVWriterException;
 
     void writeStudent(Student student) throws CSVWriterException;
 }

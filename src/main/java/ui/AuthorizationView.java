@@ -1,34 +1,37 @@
 package ui;
 
+import utils.ApplicationContext;
+
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AuthorizationView extends javax.swing.JFrame {
 
-    private JLabel jLabel13;
-    private JLabel jLabel2;
-    private JLabel jLabel3;
-    private JPanel jPanel1;
-    private JPanel jPanel12;
+    private ActionListener authorizationController;
+
     private JTextField nameField;
     private JButton okButton;
     private JTextField surnameField;
 
-
-    public AuthorizationView() {
-        initComponents();
-    }
-
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        JPanel jPanel1 = new JPanel();
+        JLabel jLabel3 = new JLabel();
         nameField = new javax.swing.JTextField();
         okButton = new javax.swing.JButton();
         surnameField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        JLabel jLabel2 = new JLabel();
+        JPanel jPanel12 = new JPanel();
+        JLabel jLabel13 = new JLabel();
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ApplicationContext.close();
+            }
+        });
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Guiz App developed by David Szapozhnik");
         setResizable(false);
@@ -123,9 +126,30 @@ public class AuthorizationView extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        okButton.addActionListener(authorizationController);
 
+        setVisible(true);
         pack();
         setLocationRelativeTo(null);
     }
 
+    public JTextField getNameField() {
+        return nameField;
+    }
+
+    public JButton getOkButton() {
+        return okButton;
+    }
+
+    public JTextField getSurnameField() {
+        return surnameField;
+    }
+
+    public void showMessage(String message){
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+    public void setAuthorizationController(ActionListener authorizationController) {
+        this.authorizationController = authorizationController;
+    }
 }

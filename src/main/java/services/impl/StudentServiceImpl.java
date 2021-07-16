@@ -2,30 +2,35 @@ package services.impl;
 
 import entity.Student;
 import exceptions.CSVWriterException;
-import exceptions.ResourceReaderException;
 import services.interfaces.StudentService;
 import utils.CSVReader;
 import utils.CSVWriter;
-import utils.ResourceReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentServiceImpl implements StudentService {
 
-    private String studentsFile;
-    private CSVReader csvReader;
+    private CSVReader studentsCSVReader;
     private CSVWriter csvWriter;
 
     @Override
-    public List<Student> getStudents() throws ResourceReaderException {
+    public List<Student> getStudents() throws CSVWriterException {
         ArrayList<Student> students = new ArrayList<>();
-        csvReader.setCsv(ResourceReader.readFileToString(studentsFile));
-        csvReader.parse();
-        CSVReader.ResultSet resultSet = csvReader.getResult();
+        studentsCSVReader.parse();
+        CSVReader.ResultSet resultSet = studentsCSVReader.getResult();
         while (resultSet.next()) {
-            students.add(new Student(resultSet.get("name"), resultSet.get("surname"), Integer.parseInt(resultSet.get("score"))));
+            Student newStudent = new Student(resultSet.get("name"), resultSet.get("surname"), Integer.parseInt(resultSet.get("score")));
+            if (students.contains(newStudent)) {
+                int index = students.indexOf(newStudent);
+                Student existing = students.get(index);
+                if (newStudent.score > existing.score)
+                    existing.score = newStudent.score;
+            } else {
+                students.add(newStudent);
+            }
         }
+        students.sort((o1, o2) -> o2.score - o1.score);
         return students;
     }
 
@@ -34,12 +39,8 @@ public class StudentServiceImpl implements StudentService {
         csvWriter.write(student.getName(), student.getSurname(), String.valueOf(student.score));
     }
 
-    public void setStudentsFile(String studentsFile) {
-        this.studentsFile = studentsFile;
-    }
-
-    public void setCsvReader(CSVReader csvReader) {
-        this.csvReader = csvReader;
+    public void setStudentsCSVReader(CSVReader studentsCSVReader) {
+        this.studentsCSVReader = studentsCSVReader;
     }
 
     public void setCsvWriter(CSVWriter csvWriter) {

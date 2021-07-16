@@ -1,43 +1,46 @@
 package ui;
 
+import utils.ApplicationContext;
+
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class QuizView extends javax.swing.JFrame {
 
+    private ActionListener quizController;
+
     private JButton boardButton;
-    private ButtonGroup buttonGroup;
     private JButton exitButton;
-    private JLabel jLabel13;
-    private JPanel jPanel1;
-    private JPanel jPanel12;
-    private JPanel jPanel2;
-    private JPanel jPanel3;
     private JRadioButton jRadioButton1;
     private JRadioButton jRadioButton2;
     private JRadioButton jRadioButton3;
     private JLabel questionLabel;
     private JButton submitButton;
 
-    public QuizView() {
-        initComponents();
-    }
-
     private void initComponents() {
 
-        buttonGroup = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
+        ButtonGroup buttonGroup = new ButtonGroup();
+        JPanel jPanel1 = new JPanel();
+        JPanel jPanel2 = new JPanel();
+        JPanel jPanel12 = new JPanel();
+        JLabel jLabel13 = new JLabel();
         exitButton = new javax.swing.JButton();
         boardButton = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        JPanel jPanel3 = new JPanel();
         questionLabel = new javax.swing.JLabel();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
         submitButton = new javax.swing.JButton();
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ApplicationContext.close();
+            }
+        });
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quiz app developed by David Sapozhnik");
 
@@ -183,9 +186,57 @@ public class QuizView extends javax.swing.JFrame {
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+        submitButton.addActionListener(quizController);
+        boardButton.addActionListener(quizController);
+        exitButton.addActionListener(quizController);
 
         pack();
         setLocationRelativeTo(null);
     }
 
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(this, message);
+    }
+
+    public JButton getBoardButton() {
+        return boardButton;
+    }
+
+    public JButton getExitButton() {
+        return exitButton;
+    }
+
+    public JButton getSubmitButton() {
+        return submitButton;
+    }
+
+    public JRadioButton getjRadioButton1() {
+        return jRadioButton1;
+    }
+
+    public JRadioButton getjRadioButton2() {
+        return jRadioButton2;
+    }
+
+    public JRadioButton getjRadioButton3() {
+        return jRadioButton3;
+    }
+
+    public JLabel getQuestionLabel() {
+        return questionLabel;
+    }
+
+    public void setQuizController(ActionListener quizController) {
+        this.quizController = quizController;
+    }
+
+    public int getSelectedIndex() {
+        if (jRadioButton1.isSelected())
+            return 1;
+        else if (jRadioButton2.isSelected())
+            return 2;
+        else if (jRadioButton3.isSelected())
+            return 3;
+        else return 0;
+    }
 }

@@ -1,30 +1,38 @@
 package utils;
 
+import exceptions.CSVWriterException;
+import exceptions.ResourceReaderException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class CSVReader {
 
-    private String csv;
+    private final String csvFile;
     private List<String> titles;
     private List<String[]> parsedRows;
 
-    public void parse() {
-        parsedRows = new ArrayList<>();
-        String[] rows = csv.split("\n");
-        for (int i = 0; i < rows.length; i++) {
-            String[] elements = rows[i].strip().split(",");
-            if (i == 0) {
-                titles = Arrays.asList(elements);
-                continue;
-            }
-            parsedRows.add(elements);
-        }
+    public CSVReader(String csvFile) {
+        this.csvFile = csvFile;
     }
 
-    public void setCsv(String csv) {
-        this.csv = csv;
+    public void parse() throws CSVWriterException {
+        try {
+            String csv = ResourceReader.readFileToString(csvFile);
+            parsedRows = new ArrayList<>();
+            String[] rows = csv.split("\n");
+            for (int i = 0; i < rows.length; i++) {
+                String[] elements = rows[i].trim().split(",");
+                if (i == 0) {
+                    titles = Arrays.asList(elements);
+                    continue;
+                }
+                parsedRows.add(elements);
+            }
+        } catch (ResourceReaderException e) {
+            throw new CSVWriterException("Exception occurs while reading csv file " + csvFile);
+        }
     }
 
     public ResultSet getResult() {
