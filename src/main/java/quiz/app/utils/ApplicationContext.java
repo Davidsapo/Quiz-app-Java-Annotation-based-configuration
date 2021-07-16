@@ -1,14 +1,15 @@
-package utils;
+package quiz.app.utils;
 
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import quiz.app.configuration.AppContextConfig;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ApplicationContext {
 
-    private static FileSystemXmlApplicationContext applicationContext;
+    private static AnnotationConfigApplicationContext applicationContext;
 
     public static void create() {
         if (applicationContext == null) {
-            applicationContext = new FileSystemXmlApplicationContext("classpath:config/ApplicationContext.xml");
+            applicationContext = new AnnotationConfigApplicationContext(AppContextConfig.class);
         }
         System.out.println("Application context opened.");
     }

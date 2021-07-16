@@ -1,7 +1,8 @@
-package utils;
+package quiz.app.utils;
 
-import exceptions.CSVWriterException;
-import exceptions.ResourceReaderException;
+import org.springframework.stereotype.Component;
+import quiz.app.exceptions.CSVWriterException;
+import quiz.app.exceptions.ResourceReaderException;
 
 import java.util.ArrayList;
 import java.util.Arrays;

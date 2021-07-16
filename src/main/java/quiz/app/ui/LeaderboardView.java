@@ -1,11 +1,16 @@
-package ui;
+package quiz.app.ui;
 
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 
-public class LeaderboardView extends javax.swing.JFrame {
+@Component
+public class LeaderboardView extends JFrame {
 
     private JList jList1;
 
+    @PostConstruct
     private void initComponents() {
 
         JPanel jPanel1 = new JPanel();

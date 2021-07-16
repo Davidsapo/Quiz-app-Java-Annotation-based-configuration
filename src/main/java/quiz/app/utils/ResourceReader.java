@@ -1,6 +1,6 @@
-package utils;
+package quiz.app.utils;
 
-import exceptions.ResourceReaderException;
+import quiz.app.exceptions.ResourceReaderException;
 import org.springframework.core.io.*;
 import org.springframework.util.FileCopyUtils;
 

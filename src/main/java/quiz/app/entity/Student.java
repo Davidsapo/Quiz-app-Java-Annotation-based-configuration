@@ -1,4 +1,4 @@
-package entity;
+package quiz.app.entity;
 
 import java.util.Objects;
 

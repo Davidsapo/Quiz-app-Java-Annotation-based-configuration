@@ -1,17 +1,22 @@
-package services.impl;
+package quiz.app.services.impl;
 
-import entity.Student;
-import exceptions.CSVWriterException;
-import services.interfaces.StudentService;
-import utils.CSVReader;
-import utils.CSVWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import quiz.app.entity.Student;
+import quiz.app.exceptions.CSVWriterException;
+import quiz.app.services.interfaces.StudentService;
+import quiz.app.utils.CSVReader;
+import quiz.app.utils.CSVWriter;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("studentsService")
 public class StudentServiceImpl implements StudentService {
 
+    @Autowired
     private CSVReader studentsCSVReader;
+    @Autowired
     private CSVWriter csvWriter;
 
     @Override
@@ -37,13 +42,5 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public void writeStudent(Student student) throws CSVWriterException {
         csvWriter.write(student.getName(), student.getSurname(), String.valueOf(student.score));
-    }
-
-    public void setStudentsCSVReader(CSVReader studentsCSVReader) {
-        this.studentsCSVReader = studentsCSVReader;
-    }
-
-    public void setCsvWriter(CSVWriter csvWriter) {
-        this.csvWriter = csvWriter;
     }
 }

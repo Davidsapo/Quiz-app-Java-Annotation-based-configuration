@@ -1,14 +1,19 @@
-package ui;
+package quiz.app.ui;
 
-import utils.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import quiz.app.utils.ApplicationContext;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class QuizView extends javax.swing.JFrame {
+@Component
+public class QuizView extends JFrame {
 
+    @Autowired
     private ActionListener quizController;
 
     private JButton boardButton;
@@ -19,6 +24,7 @@ public class QuizView extends javax.swing.JFrame {
     private JLabel questionLabel;
     private JButton submitButton;
 
+    @PostConstruct
     private void initComponents() {
 
         ButtonGroup buttonGroup = new ButtonGroup();
@@ -224,10 +230,6 @@ public class QuizView extends javax.swing.JFrame {
 
     public JLabel getQuestionLabel() {
         return questionLabel;
-    }
-
-    public void setQuizController(ActionListener quizController) {
-        this.quizController = quizController;
     }
 
     public int getSelectedIndex() {

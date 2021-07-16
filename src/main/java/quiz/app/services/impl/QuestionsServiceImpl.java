@@ -1,17 +1,19 @@
-package services.impl;
+package quiz.app.services.impl;
 
-import entity.Question;
-import exceptions.CSVWriterException;
-import exceptions.ResourceReaderException;
-import services.interfaces.QuestionsService;
-import utils.CSVReader;
-import utils.ResourceReader;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import quiz.app.entity.Question;
+import quiz.app.exceptions.CSVWriterException;
+import quiz.app.services.interfaces.QuestionsService;
+import quiz.app.utils.CSVReader;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component("questionsService")
 public class QuestionsServiceImpl implements QuestionsService {
 
+    @Autowired
     private CSVReader questionsCSVReader;
 
     @Override
@@ -24,9 +26,5 @@ public class QuestionsServiceImpl implements QuestionsService {
                     resultSet.get("answer1"), resultSet.get("answer2"), resultSet.get("answer3")));
         }
         return questions;
-    }
-
-    public void setQuestionsCSVReader(CSVReader questionsCSVReader) {
-        this.questionsCSVReader = questionsCSVReader;
     }
 }

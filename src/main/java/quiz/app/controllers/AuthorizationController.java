@@ -1,16 +1,20 @@
-package controllers;
+package quiz.app.controllers;
 
-import entity.Student;
-import exceptions.CSVWriterException;
-import exceptions.ResourceReaderException;
-import ui.AuthorizationView;
-import utils.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import quiz.app.entity.Student;
+import quiz.app.exceptions.CSVWriterException;
+import quiz.app.exceptions.ResourceReaderException;
+import quiz.app.ui.AuthorizationView;
+import quiz.app.utils.ApplicationContext;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+@Component
 public class AuthorizationController implements ActionListener {
 
+    @Autowired
     private AuthorizationView authorizationView;
 
     @Override
@@ -33,9 +37,5 @@ public class AuthorizationController implements ActionListener {
         } catch (ResourceReaderException | CSVWriterException e) {
             authorizationView.showMessage(e.getMessage());
         }
-    }
-
-    public void setAuthorizationView(AuthorizationView authorizationView) {
-        this.authorizationView = authorizationView;
     }
 }

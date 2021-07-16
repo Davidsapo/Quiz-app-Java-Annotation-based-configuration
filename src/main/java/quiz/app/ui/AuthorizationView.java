@@ -1,20 +1,26 @@
-package ui;
+package quiz.app.ui;
 
-import utils.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import quiz.app.utils.ApplicationContext;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+@Component
 public class AuthorizationView extends javax.swing.JFrame {
 
+    @Autowired
     private ActionListener authorizationController;
 
     private JTextField nameField;
     private JButton okButton;
     private JTextField surnameField;
 
+    @PostConstruct
     private void initComponents() {
 
         JPanel jPanel1 = new JPanel();
@@ -147,9 +153,5 @@ public class AuthorizationView extends javax.swing.JFrame {
 
     public void showMessage(String message){
         JOptionPane.showMessageDialog(this, message);
-    }
-
-    public void setAuthorizationController(ActionListener authorizationController) {
-        this.authorizationController = authorizationController;
     }
 }

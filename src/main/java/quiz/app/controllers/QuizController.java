@@ -1,19 +1,26 @@
-package controllers;
+package quiz.app.controllers;
 
-import entity.*;
-import exceptions.*;
-import services.interfaces.*;
-import ui.*;
-import utils.ApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import quiz.app.entity.*;
+import quiz.app.exceptions.*;
+import quiz.app.services.interfaces.*;
+import quiz.app.ui.*;
+import quiz.app.utils.ApplicationContext;
 
 import java.awt.event.*;
 import java.util.List;
 
+@Component
 public class QuizController implements ActionListener {
 
+    @Autowired
     private QuizView quizView;
+    @Autowired
     private StudentService studentsService;
+    @Autowired
     private QuestionsService questionsService;
+
     private List<Question> questions;
     private Student currentStudent;
     private int currentQuestion;
@@ -83,17 +90,5 @@ public class QuizController implements ActionListener {
         LeaderboardView leaderboardView = ApplicationContext.getBean("leaderboardView", LeaderboardView.class);
         leaderboardView.fillList(studentsService.getStudents().toArray());
         leaderboardView.setVisible(true);
-    }
-
-    public void setQuizView(QuizView quizView) {
-        this.quizView = quizView;
-    }
-
-    public void setStudentsService(StudentService studentService) {
-        this.studentsService = studentService;
-    }
-
-    public void setQuestionsService(QuestionsService questionsService) {
-        this.questionsService = questionsService;
     }
 }

@@ -1,15 +1,21 @@
-package utils;
+package quiz.app.utils;
 
-import exceptions.CSVWriterException;
-import exceptions.ResourceReaderException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import quiz.app.exceptions.CSVWriterException;
+import quiz.app.exceptions.ResourceReaderException;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+@Component
 public class CSVWriter {
 
-    private final String csvFile;
+    @Value("${students}")
+    private String csvFile;
+
+    public CSVWriter() {
+    }
 
     public CSVWriter(String csvFile) {
         this.csvFile = csvFile;

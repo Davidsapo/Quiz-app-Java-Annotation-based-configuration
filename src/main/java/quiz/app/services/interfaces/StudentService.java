@@ -1,8 +1,8 @@
-package services.interfaces;
+package quiz.app.services.interfaces;
 
-import entity.Student;
-import exceptions.CSVWriterException;
-import exceptions.ResourceReaderException;
+import quiz.app.entity.Student;
+import quiz.app.exceptions.CSVWriterException;
+import quiz.app.exceptions.ResourceReaderException;
 
 import java.util.List;
 

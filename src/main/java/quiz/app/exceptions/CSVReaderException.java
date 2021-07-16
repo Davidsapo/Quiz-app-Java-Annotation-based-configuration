@@ -1,4 +1,4 @@
-package exceptions;
+package quiz.app.exceptions;
 
 public class CSVReaderException extends Exception{
 
